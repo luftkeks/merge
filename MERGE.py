@@ -35,6 +35,7 @@ def compare(list_of_tupel):
 
 
 if __name__ == "__main__":
+"""A short test example is started by executing this script."""
 	blub=[[25,30],[2,9],[39,41],[35,40],[14, 23],[4,8], [14,21], [14,22], [2,3] , [30,31], [-1,1],[1.4,1.8]]
 	print(blub)
 	print(merge(blub))
