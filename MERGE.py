@@ -5,37 +5,20 @@ import numpy as np
 def merge(list_of_intervalls):
     """ 
     Takes a list of tupels which have to be sorted so that the smaler number of both is in the front.
-    The funktion will sort the tupel first by the first element and as second key by the second element.
-    Now it will call compare function for each unchecked tupel and thus jumping over checked tupel.
+    The function will sort the tupel first by the first element and as second key by the second element.
+    The resulting list of intervalls will be merged if overlapping.
     """
-    sorted_array_of_intervalls = np.sort(np.array(list_of_intervalls),axis=0)
-    ii,jj = 0,0
-    solution_array_of_intervalls = []
-    return_tupel = [0,0]
-    while ii < (len(sorted_array_of_intervalls)):
-        return_tupel, jj = compare(sorted_array_of_intervalls[ii:,:])
-        ii = ii + jj
-        solution_array_of_intervalls.append(return_tupel)
-    return  solution_array_of_intervalls
-
-def compare(list_of_tupel):
-    """
-    Returns the longest interval starting with the lowest tupel by checking for overlapping intervals
-    and the number of intervals which are merged. If only one element is given, the element is returned. 
-    """
-    lower_tupel = list_of_tupel[0,:]
-    list_of_higher_tupel = list_of_tupel[1:,:]
-    return_tupel=[lower_tupel[0],lower_tupel[1]]
-    for ii in range(len(list_of_higher_tupel)):
-        if return_tupel[1] > list_of_higher_tupel[ii,0]:
-            return_tupel[1] = list_of_higher_tupel[ii,1]
+    if (len(list_of_intervalls) == 0):                              # check for Empty list and return one if given.
+        return []
+    if (len(list_of_intervalls) == 1):
+        return list_of_intervalls
+    sorted_array = np.sort(np.array(list_of_intervalls),axis=0)     # sort the tupel first by the first and second by the second element
+    solution_array = np.array([sorted_array[0,]])                   # The solution starts with the lowest interval
+    for ii in range(1,len(sorted_array)):
+        if (solution_array[-1,1] > sorted_array[ii,0]):             # If the next interval overlaps just update the bigger number
+            solution_array[-1,1] =  sorted_array[ii,1]
         else:
-            return (return_tupel, ii+1)
-    return (return_tupel, 2)
+            solution_array = np.vstack((solution_array[:,:],np.array([sorted_array[ii,:]])))     # If not overlapping add to solution interval
+    return  solution_array.tolist()
 
 
-if __name__ == "__main__":
-"""A short test example is started by executing this script."""
-	blub=[[25,30],[2,9],[39,41],[35,40],[14, 23],[4,8], [14,21], [14,22], [2,3] , [30,31], [-1,1],[1.4,1.8]]
-	print(blub)
-	print(merge(blub))
