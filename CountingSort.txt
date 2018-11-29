@@ -1,0 +1,7 @@
+
+Es gibt eine bessere Methode das ganze zu machen und zwar Adressbasiert:
+
+Man geht dazu alle Felder (eins und zwei) einmal durch und schreibt sich für jeden vorkommenden wert die häufigkeit auf.
+Anschließend hat man wie beim counting sort zwei Adressen.
+
+Wenn diese nicht gleich der differenz des vorgängers sind gibt es eine Überlappung es muss gemerged werden.
