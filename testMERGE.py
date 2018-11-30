@@ -1,10 +1,14 @@
-#!/usr/bin/python3
+'''
+                            Online Python Interpreter.
+                Code, Compile, Run and Debug python program online.
+Write your code in this editor and press "Run" button to execute it.
+
+'''
+
 
 import MERGE
 
 import unittest
-
-
 
 class TestMergeMethod(unittest.TestCase):
 
@@ -45,6 +49,10 @@ class TestMergeMethod(unittest.TestCase):
         in_tupel = [[1,9], [2, 8]]
         out_tupel = [[1 , 9]]
         self.assertEqual(MERGE.merge(in_tupel), out_tupel, "Passing one wrapping the other.")
+    
+    def test_touching_not_overlapping(self):
+        in_out_tupel = [[1,5], [5, 8]]
+        self.assertEqual(MERGE.merge(in_out_tupel), in_out_tupel, "Passing touching not overlapping tupels.")
 
 if __name__ == '__main__':
     unittest.main()
