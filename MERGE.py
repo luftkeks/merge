@@ -25,7 +25,7 @@ def merge2(list_of_intervalls):
 def merge(list_of_intervalls):
     """
     Takes a list of tupels of integers and returns the a list where all the overlapping intervalls are merged.
-    Would be possible with float which will be mapped to integers.
+    Don't use this function with anything else than integers!
     """
     if (len(list_of_intervalls) == 0):                                          # Check for Empty list and return one if given.
         return []
